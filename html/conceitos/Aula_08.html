@@ -37,20 +37,20 @@
                     
             </p>
             <p>
-                <legend>Genero:</legend>
-                <label for="genero" >Feminino</label>
+                <p>Genêro:</p>
+                <label for="feminino" >Feminino</label>
                 <input type="radio" id="feminino" name="genero" value="feminino"><br>
 
-                <label for="genero" >Masculino</label>
+                <label for="masuclino" >Masculino</label>
                 <input type="radio" id="masuculino" name="genero" value="masculino"><br>
 
-                <label for="genero" >Outro</label>
+                <label for="Outro" >Outro</label>
                 <input type="radio" id="Outro" name="genero" value="outro"><br>       
             </p>
 
             <p>
-                <label for="data">Data e tempo:</label><br>
-                <input type="data" id="data" name="data" value="2026-02-05">
+                <label for="date">Data e tempo:</label><br>
+                <input type="date" id="date" name="date" value="2026-02-05">
             </p>
 
             </p>
@@ -58,7 +58,7 @@
                 <input type="datetime-local" id="datetime" name="datetime" value="2026-02-05T20:00">
             </p>
 
-            </p>
+            <p>
                 <label for="time">Minutos</label><BR>
                 <input type="time" id="time" name="time" value="20:00">
             </p>
@@ -68,25 +68,66 @@
                 <input type="color" id="color" name="color" value="#00ff00">
             </p>
 
-            </p>
+            <p>
                 <label for="email">Seu email:</label><br>
                 <input type="email" id="email" name="email" placeholder="ex: email@email.com" required>
             </p>
 
-            </p>
+            <p>
                 <label for="password">Senha:</label><br>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
             </p>
 
-            </p>
+            <p>
                 <label for="file">Arquivo:</label><br>
-                <input type="file" id="file" name="file" accept=".png, .svg, image*/">
+                <input type="file" id="file" name="file" accept=".png, .svg, image/*">
             </p>
 
             <p>
                 <label for="number">Número:</label><br>
                 <input type="number" id="number" name="number" placeholder="Digite um número" min="1" max="15" step="5">
             </p>
+            <p>
+                <label for="range">Range:</label><br>
+                <input type="range" id="range" name="range" min="1" max="20" step="2" list="tickmarks">
+            </p>
+
+            <datalist id="tickmarks">
+                <option value="0" label="10%"></option>
+                <option value="10"></option>
+                <option value="20"></option>
+                <option value="30"></option>
+                <option value="40"></option>
+                <option value="50" label="50%"></option>
+                <option value="60"></option>
+                <option value="70"></option>
+                <option value="80"></option>
+                <option value="90"></option>
+                <option value="100" label="100%">1por</option>
+            </datalist>
+        
+        <p>
+            <label type="url">URL:</label><br>
+            <input type="url" id="url" name="url" placeholder="URL" >
+        </p>
+        <p>
+            <label type="search">Pesquisa</label><br>
+            <input type="search" id="search" name="searche" placeholder="Search">
+        </p>
+        <p>
+            <label type="select" name="select">URL:</label><br>
+            <select id="select">
+                <option Value="Aleatório_01" label="Label_01" >Valor</option>
+                <option Value="Aleatório_02" label="Label_02" >Valor</option>
+                <option Value="Aleatório_03" label="Label_03" >Valor</option>
+                <option Value="Aleatório_04" label="Label_04" >Valor</option>
+                <option Value="Aleatório_04_desabilitado" label="Label_04_desabilitado" disabled >Valor</option>
+            </select>
+        </p>
+        <p>
+            <label for="textarea"></label>
+            <textarea id="textarea" name="textarea" rows="3" cols="9"></textarea>
+        </p>
     </form>
 </body>
 </html>
