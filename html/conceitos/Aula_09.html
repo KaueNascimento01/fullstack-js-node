@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/Aula09_style.css">
+</head>
+<body>
+    <h1>Seletores e Combinadores do CSS</H1>
+    <h2>Nesting</h2>   
+    <div class="pai_01">
+        Pai 1
+        <div class="pai_01 filha_p1">
+            Filha 1 do pai 1
+            <div class="neta_p1">
+                Filha da filha 1 do pai 1
+            </div>
+        </div>
+            <div class="pai_01 filha_p1">
+            Filha 2 do pai 1
+            <div class="neta_p1">
+                Filha da filha 2 do pai 1
+            </div>
+        </div>
+    </div>  
+    <hr>
+
+    <h2>Child Combinator</h2>
+    <div class="pai_02">
+        Pai 2
+        <div class="pai_02 filha_p2">
+            Filha 1 do pai 2
+            <div class="neta_p2">
+                Filha da filha 1 do pai 2
+            </div>
+        </div>
+        <div class="pai_02 filha_p2">
+            Filha 2 do pai 2
+            <div class="neta_p2">
+                Filha da filha 2 do pai 2
+            </div>
+        </div>
+        <div class="pai_01 filha_p1">
+            Filha 3 do pai 1
+            <div class="neta_p1">
+                Filha da filha 3 do pai 1
+            </div>
+        </div>
+        </div>
+    </div>
+    <hr>
+
+    <h2>Selector Chain</h2>
+    <div class="botão">Botão</div>
+    <div class="botão especial">Botão Especial</div>
+    <hr>
+
+    <h2>Adjacent Sibling Selector</h2>
+    <div class="container">
+        <h2>H2 referência</h2>
+        <p>Este é o primeiro parágrafo. O estilo do seletor adjacente chegará aqui.</p>
+        <p>Este é o segundo parágrafo. O estilo do seletor adjacente não chegará aqui</p>
+    </div> 
+</body>
+</html>

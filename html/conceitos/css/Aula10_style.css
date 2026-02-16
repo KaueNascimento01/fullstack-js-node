@@ -1,0 +1,17 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+.pai h2~p{
+    color: red;
+}
+[meu-atributo=valor1]{
+    color:aquamarine
+}
+[meu-atributo=valor2]{
+    color:rgb(1, 25, 243)
+}
+[checked] {
+    width: 30px;
+    height: 30px;
+}
