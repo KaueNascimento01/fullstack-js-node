@@ -38,4 +38,6 @@ input:checked + p{
     background-color:rgb(146, 248, 180);
     height: 20px;
     width: 85px;
+    border: 1px solid black;
+    border-radius: 3px;
 }

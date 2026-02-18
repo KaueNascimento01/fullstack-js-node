@@ -1,0 +1,53 @@
+p:not(.meio) {
+    color:rgb(0, 153, 255);
+}
+input:checked + h2{
+    color: green;
+    background-color:rgb(146, 248, 180);
+    height: 35px;
+    width: 80px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+input:not(:checked)+ h2{
+    color: red;
+    background-color:rgb(255, 161, 161);
+    height: 35px;
+    width: 80px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+.l1:nth-child(even){
+    background-color:rebeccapurple;
+}
+.l1:nth-child(odd){
+    background-color:rgb(97, 203, 211);
+}
+.l2:nth-child(2n+1){
+    background-color: rgb(148, 118, 118);
+}
+.l3::after{
+    content: "-";
+    color:rgb(0, 217, 233);
+    padding: 2px;
+    margin: 3px;
+}
+.l3::before{
+    content: "-";
+    color:rgb(0, 217, 233);
+    padding: 2px;
+    margin: 3px;
+}
+.lorem::first-letter {
+    font-size: 70px;
+}
+p::selection{
+    background-color:black;
+    color: white;
+}
+.lorem::first-line{
+    background:darkred;
+}
+::placeholder{
+    color: green;
+}
