@@ -1,0 +1,14 @@
+.texto{
+    box-sizing: border-box;
+    background-color: red;
+    height: 200px;
+    width: 100%;
+    max-height: 100px;
+    max-width: 900px;
+    min-height: 0;
+    min-width: 0;
+    overflow: auto;
+    margin: 0 auto 50px auto;
+    border: 2px solid black;
+    padding: 4px;
+}
