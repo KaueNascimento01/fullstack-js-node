@@ -1,0 +1,32 @@
+html {
+    font-size: 62.5%;
+}
+* {
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+}
+a {
+    background-color: #8A7650;
+    color: white;
+    display: block;
+    text-decoration: none;
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #EFECE3;
+}
+.color-beige {
+    background-color: #EFECE3;
+    width: 100vw;
+    height: 100vh;
+}
+.color-grey {
+    background-color: #8FABD4;
+    width: 100vw;
+    height: 100vh;
+}
+.color-blue {
+    background-color: #4A70A9;
+    width: 100vw;
+    height: 100vh;
+}
