@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%
+}
+p {
+    font-style: italic;
+    font-size: 3rem;
+    background-color: #EFECE3;
+    font-weight: bold;
+    direction: ltr;
+    letter-spacing: 0.2rem;
+    word-spacing: 0.9rem;
+    line-height: 4.5rem;
+    text-align: left;
+    text-decoration: underline;
+    text-indent: 7rem;
+    text-shadow: 0.1rem 0.1rem 0.2px red;
+    text-transform: uppercase;
+}
+p::selection{
+    background-color:black;
+    color: white;
+}
