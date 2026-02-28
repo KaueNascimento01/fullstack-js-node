@@ -1,25 +1,24 @@
+html {
+    font-size: 62.5%;
+}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-.grid::after{
+.grid {
+    background: rgb(49, 15, 15);
+    padding: 1.5rem;
+}
+.grid::after {
     content: '';
     display: block;
     clear: both;
 }
-.grid {
-    padding: 15px;
-    background: rgb(49, 15, 15)
-}
-.col .col-content{
-    height: 100%;
-    width: 100%;
-}
-.grid .col{
-    height: 300px;
-    width: 30%;
-    background: red;
+.grid .col {
+    height: 30rem;
+    background-color: red;
     float: left;
-    margin: 30px;
+    margin: 2rem;
+    width: calc(33.33% - 4rem); 
 }
