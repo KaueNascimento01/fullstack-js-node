@@ -1,0 +1,34 @@
+html {
+    font-size: 62.5%;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.grid {
+    background: rgb(49, 15, 15);
+    padding: 1.5rem;
+}
+.grid::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.grid .col {
+    height: 30rem;
+    background-color: red;
+    float: left;
+    margin: 2rem;
+    width: calc(33.33% - 4rem); 
+}
+@media (max-width: 90rem) {
+    .grid .col {
+        width: calc(50% - 4rem);
+    }
+}
+@media (max-width: 60rem) {
+    .grid .col {
+        width: calc(100% - 4rem);
+    }
+}
