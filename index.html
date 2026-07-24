@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso Explorer - Portfólio de Aprendizado</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <aside class="sidebar">
+      <div class="profile-section">
+        <img src="https://github.com/KaueNascimento01.png" alt="Avatar" class="avatar">
+        <h2>Kauê do Nascimento</h2>
+        <p>Desenvolvedor Web / Estudante</p>
+        <div class="social-links">
+          <a href="https://github.com/KaueNascimento01" target="_blank" class="social-btn">GitHub</a>
+          <span class="social-btn" style="cursor: default; opacity: 0.6;">HTML & JS</span>
+        </div>
+      </div>
+
+      <div class="filters-section">
+        <div class="search-wrapper">
+          <input type="text" id="search-input" class="search-input" placeholder="Pesquisar aula ou conceito...">
+        </div>
+
+        <div class="filter-group">
+          <label>Tecnologia</label>
+          <div class="btn-group" id="tech-filters">
+            <button class="filter-btn active" data-value="all">Todos</button>
+            <button class="filter-btn" data-value="html">HTML</button>
+            <button class="filter-btn" data-value="javascript">JavaScript</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>Tipo</label>
+          <div class="btn-group" id="type-filters">
+            <button class="filter-btn active" data-value="all">Todos</button>
+            <button class="filter-btn" data-value="conceitos">Conceitos</button>
+            <button class="filter-btn" data-value="desafios">Desafios</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lessons-list-container">
+        <div class="lessons-count" id="lessons-count">Encontradas: 0 aulas</div>
+        <div class="lessons-list" id="lessons-list">
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="main-content">
+      
+      <div class="empty-state" id="empty-state">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+        </svg>
+        <h3>Explorador de Aulas Interativo</h3>
+        <p>Selecione uma aula na barra lateral para ver os conceitos aprendidos, explorar o código-fonte estilizado e ver a demonstração ao vivo!</p>
+      </div>
+
+      <div class="detail-container" id="detail-container" style="display: none;">
+        
+        <div class="detail-header">
+          <div class="detail-meta">
+            <span class="lesson-badge" id="detail-badge-tech">HTML</span>
+            <span class="detail-type" id="detail-badge-type">Conceitos</span>
+          </div>
+          <h1 class="detail-title" id="detail-title">Nome da Aula</h1>
+          <div class="detail-tags" id="detail-tags">
+          </div>
+        </div>
+
+        <div class="content-tabs">
+          <button class="tab-link active" onclick="switchMainTab(event, 'info-tab')">Sobre a Aula</button>
+          <button class="tab-link" onclick="switchMainTab(event, 'code-tab')">Código Fonte</button>
+          <button class="tab-link" id="preview-tab-btn" onclick="switchMainTab(event, 'preview-tab')">Live Preview</button>
+        </div>
+
+        <div class="tab-panels">
+          
+          <div class="tab-panel active" id="info-tab">
+            <div class="info-panel">
+              <div class="info-section">
+                <h4>O que foi aprendido / desenvolvido:</h4>
+                <p id="detail-description">Descrição longa dos objetivos da aula...</p>
+              </div>
+              
+              <div class="info-section">
+                <h4>Arquivos que compõem esta aula:</h4>
+                <div class="files-checklist" id="detail-files-list">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="code-tab">
+            <div class="code-panel">
+              <div class="code-nav" id="code-files-nav">
+              </div>
+              <div class="code-viewer-container" id="code-viewer-container">
+                <div id="cors-alert" class="cors-error-msg" style="display: none;">
+                  <strong>Bloqueio de Segurança do Navegador (CORS):</strong>
+                  Se você está abrindo o portfólio diretamente com clique duplo no `index.html` (protocolo <code>file://</code>), o navegador bloqueia a leitura de arquivos locais por segurança.<br><br>
+                  Para resolver e ver o código aqui na tela:<br>
+                  1. Abra a pasta no VS Code e clique em <strong>Go Live</strong> (extensão Live Server).<br>
+                  2. Ou acesse a versão publicada no <strong>GitHub Pages</strong>.<br>
+                  3. Você também pode abrir o arquivo correspondente diretamente no seu editor de código.
+                </div>
+                <pre><code class="language-html" id="code-box">Carregando código...</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="preview-tab">
+            <div class="preview-panel" id="preview-panel-content">
+              <div class="preview-bar">
+                <span class="preview-address" id="preview-address-url">http://localhost/aula.html</span>
+                <a href="#" target="_blank" class="preview-btn" id="preview-external-link">
+                  Abrir em nova aba
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 14px; height: 14px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                  </svg>
+                </a>
+              </div>
+              <div class="preview-iframe-wrapper">
+                <iframe src="" class="preview-iframe" id="preview-iframe"></iframe>
+              </div>
+            </div>
+
+            <div class="console-warning" id="console-fallback" style="display: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 48px; height: 48px; color: var(--accent); margin-bottom: 15px;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
+              </svg>
+              <h4>Script de Console do Node / Navegador</h4>
+              <p>Esta aula foi focada em lógica pura estruturada, rodando os resultados diretamente no Console do Desenvolvedor (console.log).</p>
+              <p style="font-size: 13px; font-family: var(--font-mono); background: rgba(0,0,0,0.3); padding: 10px 15px; border-radius: 8px; border: 1px solid var(--border-color); color: #a855f7;">
+                Para testar: Abra o terminal e digite:<br>
+                <code>node <span id="console-command-path">caminho/do/arquivo.js</span></code>
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="catalog.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  
+  <script>
+    let currentFilterTech = 'all';
+    let currentFilterType = 'all';
+    let searchQuery = '';
+    let selectedLesson = null;
+    let selectedCodeFileKey = '';
+
+    const searchInput = document.getElementById('search-input');
+    const techFilters = document.getElementById('tech-filters');
+    const typeFilters = document.getElementById('type-filters');
+    const lessonsList = document.getElementById('lessons-list');
+    const lessonsCount = document.getElementById('lessons-count');
+    const emptyState = document.getElementById('empty-state');
+    const detailContainer = document.getElementById('detail-container');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderLessons();
+      setupEventListeners();
+    });
+
+    function setupEventListeners() {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase();
+        renderLessons();
+      });
+
+      techFilters.addEventListener('click', (e) => {
+        if (e.target.classList.contains('filter-btn')) {
+          techFilters.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+          e.target.classList.add('active');
+          currentFilterTech = e.target.getAttribute('data-value');
+          renderLessons();
+        }
+      });
+
+      typeFilters.addEventListener('click', (e) => {
+        if (e.target.classList.contains('filter-btn')) {
+          typeFilters.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+          e.target.classList.add('active');
+          currentFilterType = e.target.getAttribute('data-value');
+          renderLessons();
+        }
+      });
+    }
+
+    function renderLessons() {
+      const filtered = courseCatalog.filter(lesson => {
+        const matchesTech = currentFilterTech === 'all' || lesson.category === currentFilterTech;
+        const matchesType = currentFilterType === 'all' || lesson.type === currentFilterType;
+        const matchesSearch = !searchQuery || 
+          lesson.title.toLowerCase().includes(searchQuery) ||
+          lesson.id.toLowerCase().includes(searchQuery) ||
+          lesson.description.toLowerCase().includes(searchQuery) ||
+          lesson.tags.some(tag => tag.toLowerCase().includes(searchQuery));
+          
+        return matchesTech && matchesType && matchesSearch;
+      });
+
+      lessonsCount.innerText = `Encontradas: ${filtered.length} aula${filtered.length !== 1 ? 's' : ''}`;
+
+      lessonsList.innerHTML = '';
+      if (filtered.length === 0) {
+        lessonsList.innerHTML = '<div style="text-align: center; color: var(--text-muted); font-size: 14px; padding: 20px 0;">Nenhuma aula encontrada.</div>';
+        return;
+      }
+
+      filtered.forEach(lesson => {
+        const isSelected = selectedLesson && selectedLesson.id === lesson.id;
+        const card = document.createElement('div');
+        card.className = `lesson-card ${isSelected ? 'active' : ''}`;
+        card.setAttribute('data-id', lesson.id);
+        const codeNum = lesson.id.split('-')[1].toUpperCase();
+
+        card.innerHTML = `
+          <div class="lesson-card-header">
+            <span class="lesson-number">${codeNum}</span>
+            <span class="lesson-badge badge-${lesson.category}">${lesson.category}</span>
+          </div>
+          <div class="lesson-card-title">${lesson.title}</div>
+          <div class="lesson-card-tags">
+            ${lesson.tags.slice(0, 3).map(tag => `<span class="lesson-tag">${tag}</span>`).join('')}
+          </div>
+        `;
+
+        card.addEventListener('click', () => selectLesson(lesson));
+        lessonsList.appendChild(card);
+      });
+    }
+
+    function selectLesson(lesson) {
+      selectedLesson = lesson;
+      
+      document.querySelectorAll('.lesson-card').forEach(card => {
+        card.classList.remove('active');
+        if (card.getAttribute('data-id') === lesson.id) {
+          card.classList.add('active');
+        }
+      });
+
+      emptyState.style.display = 'none';
+      detailContainer.style.display = 'flex';
+
+      const techBadge = document.getElementById('detail-badge-tech');
+      techBadge.className = `lesson-badge badge-${lesson.category}`;
+      techBadge.innerText = lesson.category;
+
+      const typeBadge = document.getElementById('detail-badge-type');
+      typeBadge.className = `detail-type type-${lesson.type}`;
+      typeBadge.innerText = lesson.type;
+
+      document.getElementById('detail-title').innerText = lesson.title;
+      
+      const tagsContainer = document.getElementById('detail-tags');
+      tagsContainer.innerHTML = lesson.tags.map(tag => `<span class="detail-tag">${tag}</span>`).join('');
+
+      document.getElementById('detail-description').innerText = lesson.description;
+
+      const filesListContainer = document.getElementById('detail-files-list');
+      filesListContainer.innerHTML = '';
+      
+      Object.entries(lesson.files).forEach(([key, path]) => {
+        const fileDiv = document.createElement('div');
+        fileDiv.className = 'file-item';
+        
+        let iconColorClass = 'file-html-icon';
+        let svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>`;
+
+        if (key === 'css') {
+          iconColorClass = 'file-css-icon';
+          svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122A3 3 0 0 0 10.469 18h3.062a3 3 0 0 0 2.828-2.025l.447-1.341c.218-.654.82-1.134 1.503-1.22 1.345-.17 2.378-1.316 2.378-2.677v-.223c0-1.246-.92-2.3-2.148-2.457A27.135 27.135 0 0 0 12 8.003c-1.579.034-3.125.176-4.632.417-1.227.156-2.148 1.21-2.148 2.457v.223c0 1.361 1.033 2.508 2.378 2.678.683.085 1.285.565 1.503 1.219l.447 1.342Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M18 11.625v1.75a1.875 1.875 0 0 1-1.875 1.875h-8.25A1.875 1.875 0 0 1 6 13.375v-1.75m12 0h-12" /></svg>`;
+        } else if (key === 'js') {
+          iconColorClass = 'file-js-icon';
+          svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75 16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" /></svg>`;
+        }
+
+        fileDiv.innerHTML = `
+          <span class="${iconColorClass}">${svgIcon}</span>
+          <span>${path.split('/').pop()}</span>
+          <span style="margin-left: auto; font-size: 11px; color: var(--text-muted)">${key.toUpperCase()}</span>
+        `;
+        filesListContainer.appendChild(fileDiv);
+      });
+
+      const previewTabBtn = document.getElementById('preview-tab-btn');
+      const previewPanelContent = document.getElementById('preview-panel-content');
+      const consoleFallback = document.getElementById('console-fallback');
+      
+      const hasHtml = !!lesson.files.html;
+
+      if (hasHtml) {
+        previewTabBtn.style.display = 'inline-block';
+        previewPanelContent.style.display = 'flex';
+        consoleFallback.style.display = 'none';
+        
+        const fileUrl = lesson.files.html;
+        document.getElementById('preview-address-url').innerText = `http://localhost/${fileUrl}`;
+        document.getElementById('preview-external-link').href = fileUrl;
+        document.getElementById('preview-iframe').src = fileUrl;
+      } else if (lesson.files.js && !lesson.files.html) {
+        previewTabBtn.style.display = 'inline-block';
+        previewPanelContent.style.display = 'none';
+        consoleFallback.style.display = 'flex';
+        document.getElementById('console-command-path').innerText = lesson.files.js;
+      } else {
+        previewTabBtn.style.display = 'none';
+      }
+
+      setupCodeTabs();
+
+      const firstTab = document.querySelector('.content-tabs .tab-link');
+      if (firstTab) firstTab.click();
+    }
+
+    function setupCodeTabs() {
+      const navContainer = document.getElementById('code-files-nav');
+      navContainer.innerHTML = '';
+
+      if (!selectedLesson) return;
+
+      const fileEntries = Object.entries(selectedLesson.files);
+      
+      fileEntries.forEach(([key, path], index) => {
+        const btn = document.createElement('button');
+        btn.className = `code-tab-btn ${index === 0 ? 'active' : ''}`;
+        btn.innerText = path.split('/').pop();
+        btn.setAttribute('data-file-key', key);
+        
+        btn.addEventListener('click', (e) => {
+          navContainer.querySelectorAll('.code-tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          loadCodeFile(key);
+        });
+
+        navContainer.appendChild(btn);
+      });
+
+      if (fileEntries.length > 0) {
+        loadCodeFile(fileEntries[0][0]);
+      }
+    }
+
+    function loadCodeFile(fileKey) {
+      selectedCodeFileKey = fileKey;
+      const codeBox = document.getElementById('code-box');
+      const corsAlert = document.getElementById('cors-alert');
+      
+      codeBox.innerText = 'Carregando código...';
+      corsAlert.style.display = 'none';
+      
+      if (!selectedLesson || !selectedLesson.files[fileKey]) return;
+      
+      const filePath = selectedLesson.files[fileKey];
+
+      let prismLang = 'html';
+      if (fileKey === 'css') prismLang = 'css';
+      if (fileKey === 'js') prismLang = 'javascript';
+      
+      codeBox.className = `language-${prismLang}`;
+
+      fetch(filePath)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then(text => {
+          codeBox.textContent = text;
+          Prism.highlightElement(codeBox);
+        })
+        .catch(err => {
+          console.error(err);
+          codeBox.innerText = '// Erro ao carregar arquivo.';
+          if (window.location.protocol === 'file:') {
+            corsAlert.style.display = 'block';
+          }
+        });
+    }
+
+    function switchMainTab(event, tabId) {
+      document.querySelectorAll('.content-tabs .tab-link').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-panels .tab-panel').forEach(panel => panel.classList.remove('active'));
+
+      event.currentTarget.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+
+      if (tabId === 'code-tab' && selectedLesson) {
+        const codeBox = document.getElementById('code-box');
+        if (codeBox.textContent && codeBox.textContent !== 'Carregando código...') {
+          Prism.highlightElement(codeBox);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
